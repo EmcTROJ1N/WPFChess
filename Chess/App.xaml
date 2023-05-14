@@ -1,0 +1,75 @@
+﻿<Application x:Class="Chess.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Chess"
+             StartupUri="Menu.xaml">
+    <Application.Resources>
+        <ControlTemplate x:Key="shadowButtonTemplate" TargetType="{x:Type Button}">
+            <Grid>
+                <Rectangle x:Name="rect1" RadiusX="5" RadiusY="5" Width="{TemplateBinding Button.Width}" Height="{TemplateBinding Button.Height}" StrokeThickness="2">
+                    <Rectangle.Stroke>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White"/>
+                            <GradientStop Color="#FF00FF4A" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Stroke>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="1">
+                            <GradientStop Color="White"/>
+                            <GradientStop Color="#FF12FFFA" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                    <Rectangle.RenderTransformOrigin>
+                        <Point X="0.5" Y="0.5"/>
+                    </Rectangle.RenderTransformOrigin>
+
+                    <Rectangle.RenderTransform>
+                        <ScaleTransform x:Name="st1" ScaleX="1" ScaleY="1"/>
+                    </Rectangle.RenderTransform>
+
+                    <Rectangle.Effect>
+                        <DropShadowEffect x:Name="shadow1" Opacity="1" BlurRadius="10" />
+                    </Rectangle.Effect>
+                </Rectangle>
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}" />
+            </Grid>
+
+            <ControlTemplate.Triggers>
+
+                <Trigger Property="Button.IsPressed" Value="True">
+
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+
+                    <!-- Триггер срабатывает на нажатие на кнопку -->
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="shadow1"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+
+                    <!-- Триггер срабатывает на отжатие кнопки -->
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="shadow1"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="1" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+
+        </ControlTemplate>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,37 @@
+﻿<Window x:Class="Chess.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chess"
+        mc:Ignorable="d"
+        Title="Menu" Height="500" Width="800" Icon="/icon.png">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Resource/bg.jpg"/>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <MediaElement Source="MenuOst.mp3" x:Name="Player" MediaEnded="MediaElement_MediaEnded"/>
+        
+        <Button Grid.Column="1" Grid.Row="1" Template="{StaticResource shadowButtonTemplate}" FontSize="20"  FontFamily="Book Antiqua" Margin="10" Content="Новая игра" Click="StartGame"/>
+        <Button Grid.Column="1" Grid.Row="2" Template="{StaticResource shadowButtonTemplate}" FontSize="20"  FontFamily="Book Antiqua" Margin="10" Content="Продолжить сохраненную игру" Click="LoadGame"/>
+        <Button Grid.Column="1" Grid.Row="3" Template="{StaticResource shadowButtonTemplate}" FontSize="20"  FontFamily="Book Antiqua" Margin="10" Content="Настройки" Click="SettingsClick"/>
+
+    </Grid>
+</Window>
+
+

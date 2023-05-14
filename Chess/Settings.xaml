@@ -1,0 +1,57 @@
+﻿<Window x:Class="Chess.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chess"
+        mc:Ignorable="d"
+        xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="Настройки" Height="300" Width="480" Background="#ADD8E6" ResizeMode="NoResize" Icon="/icon.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" FontSize="15" Text="Цвет выделенного:" FontFamily="Book Antiqua" Foreground="Black" Margin="5"/>
+        <toolkit:ColorPicker x:Name="SelectedFigureColor" Grid.Row="0" Grid.Column="1" Margin="5"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="15" Text="Посветка ходов:" FontFamily="Book Antiqua" Foreground="Black" Margin="5"/>
+        <toolkit:ColorPicker x:Name="SelectedStepColor" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" FontSize="15" Text="Цвет тегов:" FontFamily="Book Antiqua" Foreground="Black" Margin="5"/>
+        <toolkit:ColorPicker x:Name="TagsColor" Grid.Row="2" Grid.Column="1" Margin="5"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" FontSize="15" Text="Цвет темной ячейки:" FontFamily="Book Antiqua" Foreground="Black" Margin="5"/>
+        <toolkit:ColorPicker x:Name="DarkCellColor" Grid.Row="3" Grid.Column="1" Margin="5"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" FontSize="15" Text="Цвет светлой ячейки:" FontFamily="Book Antiqua" Foreground="Black" Margin="5"/>
+        <toolkit:ColorPicker x:Name="LightCellColor" Grid.Row="4" Grid.Column="1" Margin="5"/>
+        
+        <TextBlock Grid.Row="5" Grid.Column="0" FontSize="15" Text="Выберите набор фигур:" FontFamily="Book Antiqua" Foreground="Black" Margin="5"/>
+        <ComboBox x:Name="ComboboxSprites" Grid.Row="5" Grid.Column="1" Margin="5">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Image}" Height="{Binding ElementName=ComboboxSprites, Path=ActualHeight}"/>
+                        <TextBlock Text="{Binding Title}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Button Grid.Row="6" Grid.Column="0" Content="Применить" Template="{StaticResource shadowButtonTemplate}" FontFamily="Book Antiqua" Foreground="Black" Click="ApplyClick" Margin="5"/>
+        <Button Grid.Row="6" Grid.Column="1" Content="Отмена" Template="{StaticResource shadowButtonTemplate}" FontFamily="Book Antiqua" Foreground="Black" Click="UndoClick" Margin="5"/>
+        <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Сбросить к исходным настройкам" Template="{StaticResource shadowButtonTemplate}" FontFamily="Book Antiqua" Foreground="Black" Click="ResetClick" Margin="5"/>
+    </Grid>
+</Window>

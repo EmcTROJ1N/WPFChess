@@ -1,0 +1,25 @@
+﻿<Window x:Class="Chess.Transformation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chess"
+        mc:Ignorable="d"
+        Title="Transformation" Height="445" Width="550" Icon="/icon.png" WindowStyle="None">
+    <Grid x:Name="Grid_trans" Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="Выберете желаемую фигуру"  Grid.ColumnSpan="2" FontSize="25" TextAlignment="Center" FontFamily="Book Antiqua" FontStyle="Normal" FontStretch="Normal" FontWeight="Normal"/>
+    </Grid>
+
+</Window>

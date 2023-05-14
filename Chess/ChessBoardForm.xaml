@@ -1,0 +1,73 @@
+﻿<Window x:Class="Chess.ChessBoardForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chess"
+        mc:Ignorable="d"
+        x:Name="MyWindow"
+        Title="Chess" Height="640" Width="1000"
+        Background="White" FontFamily="Book Antiqua" Icon="/icon.png">
+    <Viewbox StretchDirection="Both">
+        <DockPanel LastChildFill="True" Height="680" Width="1050">
+            
+            <MediaElement Source="TimerTickSound.mp3" MediaEnded="MediaElement_MediaEnded" x:Name="TickPlayer" Volume=".1"/>
+            
+            <Menu DockPanel.Dock="Top" Height="Auto" Margin="0 0 10 0">
+                <MenuItem Header="Новая игра" Click="NewGame" FontFamily="Book Antiqua" FontSize="15"/>
+                <MenuItem Header="Сохранить Игру" Click="SaveGame" FontFamily="Book Antiqua" FontSize="15"/>
+                <MenuItem Header="Сохранить ходы" Click="SaveSteps" FontFamily="Book Antiqua" FontSize="15"/>
+                <MenuItem Header="Перевернуть доску" Click="RotateField" FontFamily="Book Antiqua" FontSize="15"/>
+                <MenuItem Header="Удалить подсказки" Click="DeleteTags" FontFamily="Book Antiqua" FontSize="15"/>
+                <MenuItem Header="Выйти из игры" Click="Exit" FontFamily="Book Antiqua" FontSize="15"/>
+            </Menu>
+
+            <StackPanel DockPanel.Dock="Right" x:Name="EatenFirstTeam" Margin="0 0 5 0" Width="50"/>
+            <StackPanel DockPanel.Dock="Right" x:Name="EatemSecondTeam" Margin="0 0 5 0" Width="50"/>
+
+            <ScrollViewer DockPanel.Dock="Right" Width="Auto" Margin="10 0 10 0">
+                    <StackPanel Width="Auto" x:Name="Info">
+                        <TextBlock Text="First team time left: " x:Name="TimeLeftLabelTeamFirst" TextWrapping="Wrap" FontFamily="Book Antiqua" FontSize="20"/>
+                        <TextBlock Text="Second team time left: " x:Name="TimeLeftLabelTeamSecond" TextWrapping="Wrap" FontFamily="Book Antiqua" FontSize="20"/>
+                        <ListView x:Name="NotationView"
+                           Background="AliceBlue" FontSize="20"/>
+                    </StackPanel>
+                </ScrollViewer>
+            <Border x:Name="borderField" BorderBrush="#FF0596C7" BorderThickness="5" DockPanel.Dock="Bottom" Height="{Binding ElementName=borderField,Path=ActualWidth}"
+                    Width="Auto">
+                <Grid x:Name="ChessBoard">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="Field" Grid.Row="1" Grid.Column="1" Grid.RowSpan="8" Grid.ColumnSpan="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </Grid>
+            </Border>
+        </DockPanel>
+    </Viewbox>
+</Window>

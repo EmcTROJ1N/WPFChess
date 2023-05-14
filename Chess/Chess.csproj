@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="chesscom\**" />
+    <EmbeddedResource Remove="chesscom\**" />
+    <None Remove="chesscom\**" />
+    <Page Remove="chesscom\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="icon.png" />
+    <None Remove="Resource\bg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icon.png" />
+    <Resource Include="Resource\bg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+    <PackageReference Include="Stockfish.NET" Version="1.0.7" />
+  </ItemGroup>
+
+</Project>
