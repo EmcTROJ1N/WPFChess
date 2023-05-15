@@ -12,12 +12,17 @@ namespace Chess
     /// </summary>
     public partial class Menu : Window
     {
-        public Menu() => InitializeComponent();
+        public Menu()
+        {
+            InitializeComponent();
+            Player.Play();
+        }
 
         private void StartGame(object sender, RoutedEventArgs e)
         {
             ChooseSettingsBeforeGame form = new ChooseSettingsBeforeGame(this);
-            form.ShowDialog();
+            try { form.ShowDialog(); }
+            catch { return; }
         }
 
         private void LoadGame(object sender, RoutedEventArgs e)
@@ -189,5 +194,8 @@ namespace Chess
             Settings form = new Settings();
             form.ShowDialog();
         }
+
+        private void Window_Closed(object sender, EventArgs e) =>
+            Player.Stop();
     }
 }

@@ -27,6 +27,7 @@ namespace Chess
             Opponent = type;
             Level = skillLevel;
             TimeLeft = timeLeft;
+            TickPlayer.Play();
 
             ChessVisual = new VisualField(Field, ChessBoard, EatenFirstTeam, EatemSecondTeam, NotationView,
                 TimeLeftLabelTeamFirst, TimeLeftLabelTeamSecond, isWhiteBehind);
@@ -37,6 +38,7 @@ namespace Chess
             DateTime? timeFirstTeam = null, DateTime? timeSecondTeam = null, List<string>? notation = null, List<string>? eatenList = null)
         {
             InitializeComponent();
+            TickPlayer.Play();
             Opponent = type;
             if (timeFirstTeam != null)
                 TimeLeft = (DateTime)timeFirstTeam;
@@ -146,5 +148,8 @@ namespace Chess
             for (int i = idxs.Count - 1; i >= 0; i--)
                 ChessVisual.Field.Children.RemoveAt(idxs[i]);
         }
+
+        private void MyWindow_Closed(object sender, EventArgs e) =>
+            TickPlayer.Stop();
     }
 }

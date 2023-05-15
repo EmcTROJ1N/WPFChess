@@ -214,7 +214,7 @@ namespace Chess
 
             GameTimer.Interval = TimeSpan.FromSeconds(1);
             GameTimer.Tick += TimerTick;
-            MakeMovePlayer.Open(new Uri("FigureStepSound.mp3", UriKind.Relative));
+            MakeMovePlayer.Open(new Uri("Resource/FigureStepSound.mp3", UriKind.Relative));
             MakeMovePlayer.MediaEnded += (sender, e) => { MakeMovePlayer.Position = TimeSpan.Zero; MakeMovePlayer.Stop(); };
 
             Opponent = type;
@@ -226,7 +226,7 @@ namespace Chess
             
             if (Opponent == OpponentType.PC)
             {
-                Stockfish = new Stockfish.NET.Stockfish(Environment.CurrentDirectory + "\\stockfish.exe", new Random().Next(15),
+                Stockfish = new Stockfish.NET.Stockfish(Environment.CurrentDirectory + "\\Resource\\stockfish.exe", new Random().Next(15),
                     new Stockfish.NET.Models.Settings(skillLevel:Level));
                 CurrentCourse = Visual.IsWhiteBehind;
             }

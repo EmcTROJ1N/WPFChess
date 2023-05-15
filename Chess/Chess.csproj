@@ -29,4 +29,10 @@
     <PackageReference Include="Stockfish.NET" Version="1.0.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resource\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

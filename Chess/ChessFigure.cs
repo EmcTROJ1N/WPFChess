@@ -61,7 +61,7 @@ namespace Chess
             IsWhiteTeam = color == Colors.Black ? false : true;
             Parent = field;
 
-            string pathToSprite = $"{Environment.CurrentDirectory}/Sprites/";
+            string pathToSprite = $"{Environment.CurrentDirectory}/Resource/Sprites/";
             pathToSprite +=  Parent != null ? Parent.Visual.FiguresSprite : File.ReadLines("save.dat").Last();
             pathToSprite += IsWhiteTeam ? "/w" : "/b";
             

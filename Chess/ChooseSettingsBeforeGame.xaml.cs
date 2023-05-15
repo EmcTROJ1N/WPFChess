@@ -54,8 +54,8 @@ namespace Chess
             {
                 string sprite = File.ReadLines("save.dat").Last();
 
-                BlackTeam.Source = new BitmapImage(new Uri($"{Environment.CurrentDirectory}/Sprites/{sprite}/bK.png"));
-                WhiteTeam.Source = new BitmapImage(new Uri($"{Environment.CurrentDirectory}/Sprites/{sprite}/wK.png"));
+                BlackTeam.Source = new BitmapImage(new Uri($"{Environment.CurrentDirectory}/Resource/Sprites/{sprite}/bK.png"));
+                WhiteTeam.Source = new BitmapImage(new Uri($"{Environment.CurrentDirectory}/Resource/Sprites/{sprite}/wK.png"));
             }
             catch
             {

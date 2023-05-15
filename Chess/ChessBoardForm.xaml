@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         x:Name="MyWindow"
         Title="Chess" Height="640" Width="1000"
-        Background="White" FontFamily="Book Antiqua" Icon="/icon.png">
+        Background="White" FontFamily="Book Antiqua" Icon="/icon.png" Closed="MyWindow_Closed">
     <Viewbox StretchDirection="Both">
         <DockPanel LastChildFill="True" Height="680" Width="1050">
             
-            <MediaElement Source="TimerTickSound.mp3" MediaEnded="MediaElement_MediaEnded" x:Name="TickPlayer" Volume=".1"/>
+            <MediaElement Source="Resource/TimerTickSound.mp3" MediaEnded="MediaElement_MediaEnded" x:Name="TickPlayer" Volume=".1"
+                          LoadedBehavior="Manual"/>
             
             <Menu DockPanel.Dock="Top" Height="Auto" Margin="0 0 10 0">
                 <MenuItem Header="Новая игра" Click="NewGame" FontFamily="Book Antiqua" FontSize="15"/>

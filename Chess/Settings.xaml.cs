@@ -32,7 +32,7 @@ namespace Chess
             InitializeComponent();
 
             ComboboxSprites.ItemsSource = Sprites;
-            foreach (string item in Directory.GetDirectories($"{Environment.CurrentDirectory}/Sprites"))
+            foreach (string item in Directory.GetDirectories($"{Environment.CurrentDirectory}/Resource/Sprites"))
                 Sprites.Add(new SpritesTitle(Path.GetFileName(item), new BitmapImage(new Uri($"{item}/wK.png"))));
 
 

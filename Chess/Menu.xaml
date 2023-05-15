@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="Menu" Height="500" Width="800" Icon="/icon.png">
+        Title="Menu" Height="500" Width="800" Icon="/icon.png" Closed="Window_Closed">
 
     <Grid>
         <Grid.Background>
@@ -25,7 +25,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <MediaElement Source="MenuOst.mp3" x:Name="Player" MediaEnded="MediaElement_MediaEnded"/>
+        <MediaElement Source="Resource/MenuOst.mp3" x:Name="Player" MediaEnded="MediaElement_MediaEnded" LoadedBehavior="Manual"/>
         
         <Button Grid.Column="1" Grid.Row="1" Template="{StaticResource shadowButtonTemplate}" FontSize="20"  FontFamily="Book Antiqua" Margin="10" Content="Новая игра" Click="StartGame"/>
         <Button Grid.Column="1" Grid.Row="2" Template="{StaticResource shadowButtonTemplate}" FontSize="20"  FontFamily="Book Antiqua" Margin="10" Content="Продолжить сохраненную игру" Click="LoadGame"/>
