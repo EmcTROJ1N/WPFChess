@@ -1,8 +1,6 @@
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="Chess/Resource/icon.png" alt="Logo" width="80" height="80">
-  </a>
+  <img src="Chess/Resource/icon.png" alt="Logo" width="80" height="80">
 
   <h3 align="center">WPF Chess game</h3>
 
@@ -113,7 +111,22 @@ Clone the repo
 
 ## Gameplay:
 
+### Classic
 
+<img src="GamePlayPics/GameScreen.png">
+<img src="GamePlayPics/GamePlay2.png">
+
+### Chess 960
+
+<img src="GamePlayPics/Chess960Mode.png">
+
+### Settings
+
+<img src="GamePlayPics/Settings.png">
+
+### Pregame settings
+
+<img src="GamePlayPics/PreGame.png">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
