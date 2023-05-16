@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -84,80 +85,105 @@ namespace Chess
                 {
                     ChessFigure[,] figures = new ChessFigure[8, 8];
 
-                    List<ChessFigure> whiteFigures = new List<ChessFigure>()
-                    {
-                        new Rook(Colors.White, new Point(7, 0)),
-                        new Knight(Colors.White, new Point(7, 0)),
-                        new Bishop(Colors.White, new Point(7, 0)),
-                        new Queen(Colors.White, new Point(7, 0)),
-                        new King(Colors.White, new Point(7, 0)),
-                        new Bishop(Colors.White, new Point(7, 0)),
-                        new Knight(Colors.White, new Point(7, 0)),
-                        new Rook(Colors.White, new Point(7, 0)),
-                    };
+                    ChessFigure[] whiteFigures = new ChessFigure[8];
+                    //{
+                    //    new Rook(Colors.White, new Point(7, 0)),
+                    //    new Knight(Colors.White, new Point(7, 0)),
+                    //    new Bishop(Colors.White, new Point(7, 0)),
+                    //    new Queen(Colors.White, new Point(7, 0)),
+                    //    new King(Colors.White, new Point(7, 0)),
+                    //    new Bishop(Colors.White, new Point(7, 0)),
+                    //    new Knight(Colors.White, new Point(7, 0)),
+                    //    new Rook(Colors.White, new Point(7, 0)),
+                    //};
 
-                    List<ChessFigure> blackFigures = new List<ChessFigure>()
-                    {
-                        new Rook(Colors.Black, new Point(0, 0)),
-                        new Knight(Colors.Black, new Point(0, 0)),
-                        new Bishop(Colors.Black, new Point(0, 0)),
-                        new Queen(Colors.Black, new Point(0, 0)),
-                        new King(Colors.Black, new Point(0, 0)),
-                        new Bishop(Colors.Black, new Point(0, 0)),
-                        new Knight(Colors.Black, new Point(0, 0)),
-                        new Rook(Colors.Black, new Point(0, 0)),
-                    };
+                    ChessFigure[] blackFigures = new ChessFigure[8];
 
                     Random random = new Random();
-                    void shuffle(ref List<ChessFigure> data)
+
+                    //void swap(IList<ChessFigure> lst, int idx1, int idx2)
+                    //{
+                    //    ChessFigure tmp = lst[idx1];
+                    //    lst[idx1] = lst[idx2];
+                    //    lst[idx2] = tmp;
+                    //}
+
+                    int getRandomEmptyPos(IList<int> exclude)
                     {
-                        for (int i = data.Count - 1; i >= 1; i--)
+                        int result;
+                        do
                         {
-                            int j = random.Next(i + 1);
-                            var temp = data[j];
-                            data[j] = data[i];
-                            data[i] = temp;
-                        }
+                            result = random.Next(0, 8);
+                        } while (exclude.Contains(result));
+                        exclude.Remove(result);
+                        return result;
                     }
 
-                    shuffle(ref whiteFigures);
-                    shuffle(ref blackFigures);
+                    int kingIdx = random.Next(1, 6);
+                    whiteFigures[kingIdx] = new King(Colors.White, new Point(7, 0));
 
-                    foreach (var figure in whiteFigures) figure.IsWhiteTeam = true;
+                    int rookFirstIdx = random.Next(0, kingIdx);
+                    int rookSecondIdx = random.Next(kingIdx + 1, 8);
+                    whiteFigures[rookFirstIdx] = new Rook(Colors.White, new Point(7, 0));
+                    whiteFigures[rookSecondIdx] = new Rook(Colors.White, new Point(7, 0));
+
+
+                    List<int> exclude = new List<int> { kingIdx, rookFirstIdx, rookSecondIdx };
+                    int bishopFirstIdx = getRandomEmptyPos(exclude);
+                    exclude.Add(bishopFirstIdx);
+                    whiteFigures[bishopFirstIdx] = new Bishop(Colors.White, new Point(7, 0));
+
+
+                    List<int> secondBishupExclude = new List<int>();
+                    secondBishupExclude.AddRange(exclude);
+                    secondBishupExclude.AddRange(
+                        (from numb in Enumerable.Range(0, 8)
+                         where numb % 2 == bishopFirstIdx % 2
+                         select numb));
+                    int bishopSecondIdx = getRandomEmptyPos(secondBishupExclude);
+                    exclude.Add(bishopSecondIdx);
+                    whiteFigures[bishopSecondIdx] = new Bishop(Colors.White, new Point(7, 0));
+
+
+                    int queenIdx = getRandomEmptyPos(exclude);
+                    whiteFigures[queenIdx] = new Queen(Colors.White, new Point(7, 0));
+                    exclude.Add(queenIdx);
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        int idx = getRandomEmptyPos(exclude);
+                        exclude.Add(idx);
+                        whiteFigures[idx] = new Knight(Colors.White, new Point(7, 0));
+                        blackFigures[idx] = new Knight(Colors.Black, new Point(7, 0));
+                    }
+
+                    blackFigures[rookFirstIdx] = new Rook(Colors.Black, new Point(7, 0));
+                    blackFigures[rookSecondIdx] = new Rook(Colors.Black, new Point(7, 0));
+                    blackFigures[kingIdx] = new King(Colors.Black, new Point(7, 0));
+                    blackFigures[bishopFirstIdx] = new Bishop(Colors.Black, new Point(7, 0));
+                    blackFigures[bishopSecondIdx] = new Bishop(Colors.Black, new Point(7, 0));
+                    blackFigures[queenIdx] = new Queen(Colors.Black, new Point(7, 0));
+
 
                     for (int i = 0; i < 8; i++)
                     {
-                        if (IsWhiteBehind)
-                        {
-                            figures[7, i] = whiteFigures[i];
-                            figures[0, i] = blackFigures[i];
-                            figures[7, i].CurrentPos = new Point(7, i);
-                            figures[0, i].CurrentPos = new Point(0, i);
-                        }
-                        else
-                        {
-                            figures[0, i] = whiteFigures[i];
-                            figures[7, i] = blackFigures[i];
-                            figures[0, i].CurrentPos = new Point(0, i);
-                            figures[7, i].CurrentPos = new Point(7, i);
-                        }
+                        int whiteHorizontal = IsWhiteBehind ? 7 : 0;
+                        int blackHorizontal = IsWhiteBehind ? 0 : 7;
+                        int whitePawnsHorizontal = Math.Abs(whiteHorizontal - 1);
+                        int blackPawnsHorizontal = Math.Abs(blackHorizontal - 1);
+                        whiteFigures[i].IsWhiteTeam = true;
+                        blackFigures[i].IsWhiteTeam = false;
 
-                    }
-                    for (int i = 0; i < 8; i++)
-                    {
-                        if (IsWhiteBehind)
-                        {
-                            figures[6, i] = new Pawn(Colors.White, new Point(6, i));
-                            figures[1, i] = new Pawn(Colors.Black, new Point(1, i));
-                        }
-                        else
-                        {
-                            figures[6, i] = new Pawn(Colors.Black, new Point(6, i));
-                            figures[1, i] = new Pawn(Colors.White, new Point(1, i));
-                        }
+                        figures[whiteHorizontal, i] = whiteFigures[i];
+                        figures[blackHorizontal, i] = blackFigures[i];
+                        figures[whiteHorizontal, i].CurrentPos = new Point(whiteHorizontal, i);
+                        figures[blackHorizontal, i].CurrentPos = new Point(blackHorizontal, i);
+
+                        figures[whitePawnsHorizontal, i] = new Pawn(Colors.White, new Point(whitePawnsHorizontal, i));
+                        figures[blackPawnsHorizontal, i] = new Pawn(Colors.Black, new Point(blackPawnsHorizontal, i));
                     }
 
-                    form = new ChessBoardForm(figures, ChessField.OpponentType.Friend, true, 0, IsWhiteBehind, 
+                    form = new ChessBoardForm(figures, ChessField.OpponentType.Friend, true, 0, IsWhiteBehind,
                         new DateTime(1970, 1, 1, 0, Int32.Parse(timeTextBox.Text), 0),
                         new DateTime(1970, 1, 1, 0, Int32.Parse(timeTextBox.Text), 0));
                 }

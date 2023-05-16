@@ -895,7 +895,6 @@ namespace Chess
                         Grid.SetRow(Figures[i, j]?.Sprite, i);
                         Grid.SetColumn(Figures[i, j]?.Sprite, j);
                         Visual.Field.Children.Add(Figures[i, j]?.Sprite);
-
                     }
                 }
             }
